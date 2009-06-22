@@ -11,9 +11,9 @@ end
 Net::SMTP.class_eval do
 
   alias_method :old_initialize, :initialize
-  def initialize(hostname)
+  def initialize(hostname, port=nil)
     @usetls = @@usetls
-    old_initialize hostname
+    old_initialize(hostname, port)
   end
 
   @@usetls = false

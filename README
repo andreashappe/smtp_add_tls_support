@@ -58,10 +58,11 @@ Net::SMTP.start('mymailserver.com', 25, 'myhostname',
     'recipient@othermailaddress.com'
 }
 
-Thanks to (people I copied snipplets from)
-==========================================
+Thanks to
+=========
 
- * Daniel Hobe
+ * Daniel Hobe (copied some snipplets from him)
+ * Stefan Huehner (initializer fix, made it work with redmine)
 
 Copyright (c) 2007 Andreas Happe <andreashappe@snikt.net>, released under
 the MIT license
