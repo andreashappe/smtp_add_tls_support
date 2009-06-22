@@ -1,0 +1,67 @@
+SMTPAddTLSSupport
+=================
+
+This plugin adds STARTTLS support to the Net::SMTP class.
+
+In contrast to http://rubyforge.org/projects/tlsmail/ (which replaces the
+Ruby 1.8's net/smtp and net/pop3 with the ruby 1.9 ones this plugin tries
+to be as unintrusive as possible. The helper functions were copied from
+various places in the internet.
+
+The plugin has been tested with Ruby on Rails 2.0.1.
+
+If you like it and have a workingwithrails.com account recommend me,
+my username is 'andreashappe'.
+
+Installation
+============
+
+Just install the plugin (get the latest version from
+http://happiness-is-slavery.net/wp-content/rails-plugins/) It will
+automatically (and locally) alter the Net::SMTP behaviour as soon as it
+is loaded as a Ruby on Rails plugin.
+
+Example
+=======
+
+Enable STARTTLS support globally:
+Net::SMTP.enable_tls()
+
+or enable STARTTLS support for one SMTP instance:
+
+smtp = Net::SMTP.new('mymailserver.com', 25)
+smtp.enable_tls
+
+check if tls is enabled:
+
+smtp.use_tls? (or Net::SMTP.use_tls? for the global config)
+
+send the message (STARTTLS will be used) just as before:
+
+smtp = Net::SMTP.new('mymailserver.com', 25)
+smtp.enable_tls
+
+smtp.start('myhostname','username','password') { |s|
+    s.send_message msgstr,
+    'my@mailaddress.com',
+    'recipient@othermailaddress.com'
+}
+smtp.finish
+
+or send it through Net::SMTP:
+
+Net::SMTP.enable_tls
+Net::SMTP.start('mymailserver.com', 25, 'myhostname',
+                'username', 'password', :plain) {|smtp|
+    smtp.send_message msgstr,
+    'my@mailaddress.com',
+    'recipient@othermailaddress.com'
+}
+
+Thanks to (people I copied snipplets from)
+==========================================
+
+ * Daniel Hobe
+
+Copyright (c) 2007 Andreas Happe <andreashappe@snikt.net>, released under
+the MIT license
